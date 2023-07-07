@@ -1,2 +1,2 @@
 #!/bin/bash
-stat --format="%a" elloh | xargs -I % chmod % hello
+chmod --reference=olleh hello
