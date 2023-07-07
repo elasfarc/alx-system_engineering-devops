@@ -1,2 +1,2 @@
 #!/bin/bash
-chmod `stat --format="%a" olleh` hello
+stat --format="%a" elloh | xargs -I % chmod % hello
