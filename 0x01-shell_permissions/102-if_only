@@ -1,2 +1,2 @@
 #!/bin/bash
-if []
+chown --from="guillaume" betty hello
