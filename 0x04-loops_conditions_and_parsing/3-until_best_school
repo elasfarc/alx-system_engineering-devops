@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# A shell script to print "Best School" 10 times using `until`.
+
+i=10
+STR="Best School"
+
+until ((i == 0));
+do
+	echo "$STR"
+	((i--));
+done 
