@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#Bash script that displays lines containing the bash word.
+# shellcheck disable=SC2009
+
+
+ps --sort user --forest -C bash \
+    -o user,pid,%cpu,%mem,vsz,rss,tty,stat,start_time,bsdtime,command
