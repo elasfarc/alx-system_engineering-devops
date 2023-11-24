@@ -5,4 +5,4 @@
 # Show process hierarchy
 
 
-ps --sort user --forest -Ao user,pid,%cpu,%mem,vsz,rss,tty8,stat,start_time,bsdtime,comm
+ps -Ao user,pid,%cpu,%mem,vsz,rss,tty,stat,start_time,bsdtime,command --sort user --forest
