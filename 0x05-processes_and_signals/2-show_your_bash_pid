@@ -3,5 +3,4 @@
 # shellcheck disable=SC2009
 
 
-ps --sort user --forest -C bash \
-    -o user,pid,%cpu,%mem,vsz,rss,tty,stat,start_time,bsdtime,command
+./1-list_your_processes | grep bash
