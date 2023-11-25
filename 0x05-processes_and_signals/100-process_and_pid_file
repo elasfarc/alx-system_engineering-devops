@@ -13,7 +13,7 @@ clean()
   exit
 }
 
-trap 'echo I hate the kill command; clean' SIGTERM
+trap 'echo I hate the kill command && clean' SIGTERM
 trap 'clean' SIGQUIT
 trap "echo Y U no love me?!" SIGINT
 
