@@ -7,7 +7,7 @@ hour=0
 minute=0
 
 
-while (("$hour" < 12));
+while (("$hour" <= 12));
 do
 
   if ((minute == 0))
