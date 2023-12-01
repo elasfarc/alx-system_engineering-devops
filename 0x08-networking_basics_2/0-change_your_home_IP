@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# Bash script that configures an Ubuntu server with:
+#localhost resolves to 127.0.0.2
+#facebook.com resolves to 8.8.8.8
+
+cp /etc/hosts ~/hosts.bak
+HOSTS_TEMP="$HOME/hosts.bak"
+
+REGEX_1="127\.0\.0\.1.*localhost|localhost.*127\.0\.0\.1"
+
+function grep_hosts
+{
+  # n => line number, m=> match only one, c=>
+  grep -m 1 -nE "$1" /etc/hosts
+}
+
+function replace_line_or_append
+{
+  # $1 file_name, $2 regex,  $3 new_content
+
+  if (( $(grep_hosts "$2" | wc -l) >= 1))
+  then
+    line_number=$(grep_hosts "$2" | cut -d ":" -f 1)
+    sed "$line_number c $3" "$1" > "$HOSTS_TEMP"
+  else
+    echo -e "$3" >> "$HOSTS_TEMP"
+  fi
+}
+
+replace_line_or_append "/etc/hosts" "$REGEX_1" "127.0.0.2\tlocalhost"
+replace_line_or_append "/etc/hosts" "facebook.com" "8.8.8.8\tfacebook.com"
+
+cp -f "$HOSTS_TEMP" /etc/hosts
