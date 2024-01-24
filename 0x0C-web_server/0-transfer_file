@@ -9,11 +9,7 @@ else
 	IP=$2
 	SSH_KEY=$4
 	
-	if [ -z "$SSH_KEY" ]; then
-		scp -T "$PATH_TO_FILE" "$USER"@"$IP":~/
-	else
-		scp -T -i "$SSH_KEY" "$PATH_TO_FILE" "$USER"@"$IP":~/
-	fi
+	scp -o StrictHostKeyChecking=no -i "$SSH_KEY" "$PATH_TO_FILE" "$USER"@"$IP":~/
 
 fi
 
