@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+#	=== 	Install nginx web server	===
+ssh ubuntu@54.88.203.157 "sudo apt-get -y install nginx"
+
+#	===		listen on port 80	===
+
+SITE_CONF="/etc/nginx/sites-available/default"
+PORT=80
+
+#get the lines with lines numbers that has the word 'listen'
+grep -n 'listen' "$SITE_CONF" | \
+# execlude comments and lines has 'ssl' (https)
+grep -v -E 'ssl|#' | \
+# Extracts the first field (before the colon) (only line numbers)
+cut -d ':' -f1 | \
+#Uses the extracted field as a pattern (__) to replace PORT for these lines with the value of the PORT variable
+xargs -I __ sed -i "__s/[0-9]\+/$PORT/" "$SITE_CONF"
+
+
+# 	=== (requesting a page) using curl, returns a page that contains the string Hello World!	===
+
+INDEX_DIR="/var/www/html"
+echo "Hello World!" > "$(find "$INDEX_DIR" -name 'index*')"
+
+# resetart nginx 
+sudo nginx -s restart
+
+
+
+ 
+
+
+
