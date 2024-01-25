@@ -9,9 +9,10 @@ sudo ufw allow 'Nginx HTTP'
 SITE_CONF="/etc/nginx/sites-available/default"
 PORT=80
 #get the lines with lines numbers that has the word 'listen'
-grep -n 'listen' "$SITE_CONF" |
+
+grep -n 'listen' "$SITE_CONF" | \
 # execlude comments and lines has 'ssl' (https)
-grep -v -E 'ssl|#' |
+grep -v -E 'ssl|#' | \
 # Extracts the first field (before the colon) (only line numbers)
 cut -d ':' -f1 | \
 #Uses the extracted field as a pattern (__) to replace PORT for these lines with the value of the PORT variable
