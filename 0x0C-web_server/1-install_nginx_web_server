@@ -29,3 +29,4 @@ echo "Hello World!" | sudo tee "$(find "$INDEX_DIR" -name 'index*')"
 
 # resetart nginx 
 sudo service nginx reload
+sudo service nginx start
