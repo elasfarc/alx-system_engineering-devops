@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 #	=== 	Install nginx web server	===
-ssh ubuntu@54.88.203.157 "sudo apt-get -y update && sudo apt-get -y install nginx"
+ssh ubuntu@54.87.204.116 "sudo apt-get -y update && sudo apt-get -y install nginx"
 
 #	===		listen on port 80	===
 
+
+ssh -t ubuntu@54.87.204.116 << 'EOF'
 SITE_CONF="/etc/nginx/sites-available/default"
 PORT=80
-
-ssh -t ubuntu@54.88.203.157 << EOF
 #get the lines with lines numbers that has the word 'listen'
 grep -n 'listen' "$SITE_CONF" |
 # execlude comments and lines has 'ssl' (https)
@@ -21,17 +21,12 @@ EOF
 
 # 	=== (requesting a page) using curl, returns a page that contains the string Hello World!	===
 
+ssh ubuntu@54.87.204.116 << 'EOF'
 INDEX_DIR="/var/www/html"
-ssh ubuntu@54.88.203.157 << EOF
 echo "Hello World!" | sudo tee "$(find "$INDEX_DIR" -name 'index*')"
 EOF
 
 # resetart nginx 
-sudo service nginx reload 
-
-
-
- 
-
-
-
+ssh ubuntu@54.87.204.116 << EOF
+sudo service nginx reload
+EOF
