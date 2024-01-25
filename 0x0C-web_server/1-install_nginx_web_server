@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 #	=== 	Install nginx web server	===
-sudo apt-get -y update
-sudo apt-get -y install ufw
-sudo apt-get -y install nginx
+apt-get -y update
+apt-get -y install ufw
+apt-get -y install nginx
 
 
-sudo ufw allow 'Nginx HTTP'
+ufw allow 'Nginx HTTP'
 
 #	===		listen on port 80	===
 
@@ -19,15 +19,15 @@ grep -v -E 'ssl|#' | \
 # Extracts the first field (before the colon) (only line numbers)
 cut -d ':' -f1 | \
 #Uses the extracted field as a pattern (__) to replace PORT for these lines with the value of the PORT variable
-xargs -I __ sudo sed -i "__s/[0-9]\+/$PORT/" "$SITE_CONF"
+xargs -I __ sed -i "__s/[0-9]\+/$PORT/" "$SITE_CONF"
 
 
 
 # 	=== (requesting a page) using curl, returns a page that contains the string Hello World!	===
 INDEX_DIR="/var/www/html"
-echo "Hello World!" | sudo tee "$(find "$INDEX_DIR" -name 'index*')"
+echo "Hello World!" | tee "$(find "$INDEX_DIR" -name 'index*')"
 
 
 # resetart nginx 
-sudo service nginx reload
-sudo service nginx start
+service nginx reload
+service nginx start
