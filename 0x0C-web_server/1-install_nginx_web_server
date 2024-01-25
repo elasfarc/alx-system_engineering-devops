@@ -2,6 +2,8 @@
 #	=== 	Install nginx web server	===
 sudo apt-get -y update
 sudo apt-get -y install nginx
+
+sudo apt-get -y install ufw
 sudo ufw allow 'Nginx HTTP'
 
 #	===		listen on port 80	===
